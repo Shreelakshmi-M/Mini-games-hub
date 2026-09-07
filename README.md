@@ -45,8 +45,12 @@ Download or clone the repository and open **`index.html`** in a modern web brows
 
 To develop a unified browser-based platform that demonstrates **web development, JavaScript programming, user interaction, game logic, and score management**.
 
-## Author
+## Project Team
 
-**Pravalika M**  
+- Shreelakshmi M
+- Sindhu C A
+- Aditi R Prasad
+- Daneshwari B Surkode
+
 B.E. Electrical & Electronics Engineering  
 B.N.M. Institute of Technology, Bengaluru
