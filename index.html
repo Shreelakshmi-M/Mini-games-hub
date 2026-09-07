@@ -1,0 +1,235 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Mini Games Hub</title>
+  
+</head>
+<body>
+  <header class="hero">
+    <div>
+      <p class="eyebrow">INTEGRATION OF MINI GAMES</p>
+      <h1>Mini Games Hub</h1>
+      <p class="subtitle">Logic & Puzzle and Math & Strategy and Word & Trivia games in one place.</p>
+    </div>
+    <div class="score-pill">Total Score: <span id="totalScore">0</span></div>
+  </header>
+
+  <nav class="tabs" aria-label="Game categories">
+    <button class="tab active" data-category="logic">Logic & Puzzle</button>
+    <button class="tab" data-category="math">Math & Strategy</button>
+    <button class="tab" data-category="word">Word & Trivia</button>
+  </nav>
+
+  <main>
+    <section class="category" id="logic">
+      <div class="category-head"><h2>Logic & Puzzle Games</h2><p>Think, solve and improve your score.</p></div>
+      <div class="game-grid">
+        <article class="game-card" data-game="tictactoe"><h3>❌ Tic-Tac-Toe</h3><p>Play against a friend or the computer.</p><button>Play Game</button></article>
+        <article class="game-card" data-game="sudoku"><h3>🔢 Sudoku</h3><p>Complete the 9×9 number puzzle.</p><button>Play Game</button></article>
+        <article class="game-card" data-game="hangman"><h3>🎯 Hangman</h3><p>Guess the hidden word before attempts run out.</p><button>Play Game</button></article>
+        <article class="game-card" data-game="sliding"><h3>🧩 Sliding Puzzle</h3><p>Arrange the tiles into the correct order.</p><button>Play Game</button></article>
+      </div>
+    </section>
+
+    <section class="category hidden" id="math">
+      <div class="category-head"><h2>Math & Strategy Games</h2><p>Practice numbers, probability and strategy.</p></div>
+      <div class="game-grid">
+        <article class="game-card" data-game="fibonacci"><h3>🌀 Fibonacci Sequence</h3><p>Generate a Fibonacci sequence.</p><button>Play Game</button></article>
+        <article class="game-card" data-game="rps"><h3>✊ Rock-Paper-Scissors</h3><p>Challenge the computer.</p><button>Play Game</button></article>
+        <article class="game-card" data-game="guess"><h3>🎲 Guess My Number</h3><p>Find the hidden number from 1 to 100.</p><button>Play Game</button></article>
+        <article class="game-card" data-game="kenken"><h3>➗ KenKen</h3><p>Solve the arithmetic challenge.</p><button>Play Game</button></article>
+      </div>
+    </section>
+
+    <section class="category hidden" id="word">
+      <div class="category-head"><h2>Word & Trivia Games</h2><p>Test vocabulary, spelling and general knowledge.</p></div>
+      <div class="game-grid">
+        <article class="game-card" data-game="scramble"><h3>🔤 Word Scramble</h3><p>Unscramble the displayed letters.</p><button>Play Game</button></article>
+        <article class="game-card" data-game="chain"><h3>🔗 Word Chain</h3><p>Continue the chain using the required starting letter.</p><button>Play Game</button></article>
+        <article class="game-card" data-game="trivia"><h3>🌍 Trivia Quiz</h3><p>Answer five general-knowledge questions.</p><button>Play Game</button></article>
+      </div>
+    </section>
+  </main>
+
+  <div id="modal" class="modal hidden" aria-hidden="true">
+    <div class="modal-box">
+      <button id="closeModal" class="close" aria-label="Close">×</button>
+      <div id="gameArea"></div>
+    </div>
+  </div>
+
+  <footer>
+    <p>Mini Games Hub • Web implementation of the integrated mini-game project</p>
+  </footer>
+
+
+<style>
+*{box-sizing:border-box}
+:root{--bg:#f4f7fb;--card:#fff;--text:#172033;--muted:#667085;--primary:#5b5bd6;--border:#e4e7ec;--soft:#eef0ff}
+body{margin:0;font-family:Inter,Segoe UI,Arial,sans-serif;background:var(--bg);color:var(--text)}
+.hero{padding:42px 7%;background:linear-gradient(135deg,#20245f,#5b5bd6);color:white;display:flex;justify-content:space-between;gap:20px;align-items:center}
+.eyebrow{font-size:12px;letter-spacing:2px;opacity:.8;margin:0 0 8px}
+h1{font-size:42px;margin:0 0 8px}.subtitle{margin:0;opacity:.9}.score-pill{background:rgba(255,255,255,.16);padding:12px 18px;border-radius:999px;font-weight:700}
+.tabs{display:flex;gap:8px;flex-wrap:wrap;padding:18px 7%;background:#fff;border-bottom:1px solid var(--border)}
+.tab{border:0;background:#f2f4f7;color:#344054;padding:11px 16px;border-radius:10px;cursor:pointer;font-weight:700}
+.tab.active{background:var(--primary);color:white}
+main{padding:30px 7%;min-height:65vh}.category-head{margin-bottom:18px}.category-head h2{margin:0 0 5px}.category-head p{margin:0;color:var(--muted)}
+.game-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:18px}
+.game-card{background:var(--card);border:1px solid var(--border);border-radius:18px;padding:20px;box-shadow:0 7px 24px rgba(16,24,40,.05);display:flex;flex-direction:column;min-height:190px}
+.game-card h3{margin:0 0 10px}.game-card p{color:var(--muted);line-height:1.5;flex:1}
+.game-card button,.primary{border:0;background:var(--primary);color:white;padding:11px 15px;border-radius:10px;cursor:pointer;font-weight:700}
+.secondary{border:1px solid var(--border);background:#fff;padding:10px 14px;border-radius:10px;cursor:pointer;font-weight:700}
+.hidden{display:none!important}
+.modal{position:fixed;inset:0;background:rgba(10,15,30,.62);display:flex;align-items:center;justify-content:center;padding:18px;z-index:10}
+.modal-box{background:white;width:min(850px,100%);max-height:92vh;overflow:auto;border-radius:20px;padding:28px;position:relative}
+.close{position:absolute;right:15px;top:10px;border:0;background:transparent;font-size:30px;cursor:pointer;color:#667085}
+.game-title{margin:0 0 5px}.game-note{color:var(--muted);margin-top:0}
+.game-actions{display:flex;gap:10px;flex-wrap:wrap;margin:15px 0}
+.status{padding:12px;background:var(--soft);border-radius:10px;margin:12px 0;font-weight:600}
+.board{display:grid;gap:5px;margin:18px auto;max-width:360px}
+.ttt{grid-template-columns:repeat(3,1fr)}.ttt button{aspect-ratio:1;font-size:34px;font-weight:800}
+.cell{border:1px solid var(--border);background:#fafafa;border-radius:8px;cursor:pointer}
+.sudoku{grid-template-columns:repeat(9,1fr);max-width:450px}
+.sudoku input{width:100%;aspect-ratio:1;text-align:center;font-size:18px;border:1px solid #d0d5dd}
+.sudoku input:nth-child(3n){border-right:2px solid #475467}.sudoku input:nth-child(n+19):nth-child(-n+27),.sudoku input:nth-child(n+46):nth-child(-n+54){border-bottom:2px solid #475467}
+.letters{display:flex;gap:7px;flex-wrap:wrap;margin:15px 0}.letter-btn{padding:9px 12px;border:1px solid var(--border);background:white;border-radius:8px;cursor:pointer}
+.puzzle{display:grid;grid-template-columns:repeat(3,1fr);gap:5px;max-width:330px;margin:20px auto}.tile{aspect-ratio:1;border:0;border-radius:10px;background:#e9ebff;font-size:24px;font-weight:800;cursor:pointer}.tile.empty{background:#f8f9fa}
+.choice-row{display:flex;gap:10px;flex-wrap:wrap}.choice{padding:12px 16px;border:1px solid var(--border);background:white;border-radius:10px;cursor:pointer;font-weight:700}
+textarea,input[type=text],input[type=number],select{padding:10px;border:1px solid #d0d5dd;border-radius:9px;font:inherit}
+.question{padding:18px;border:1px solid var(--border);border-radius:14px;margin:12px 0}
+.pet-stats{display:grid;grid-template-columns:repeat(3,1fr);gap:10px}.stat{padding:15px;background:#f9fafb;border-radius:12px;text-align:center}.stat strong{display:block;font-size:24px}
+pre.output{background:#101828;color:#f8fafc;padding:16px;border-radius:12px;overflow:auto;white-space:pre-wrap}
+footer{text-align:center;padding:25px;color:var(--muted)}
+@media(max-width:650px){.hero{padding:30px 5%;align-items:flex-start;flex-direction:column}h1{font-size:32px}.tabs,main{padding-left:5%;padding-right:5%}.modal-box{padding:22px 17px}}
+
+</style>
+<script>
+window.GameHub = {
+  score: Number(localStorage.getItem("miniGamesScore") || 0),
+  addScore(points){
+    this.score += points;
+    localStorage.setItem("miniGamesScore", this.score);
+    const el=document.getElementById("totalScore");
+    if(el) el.textContent=this.score;
+  },
+  shuffle(arr){ return [...arr].sort(()=>Math.random()-0.5); },
+  escape(s){return String(s).replace(/[&<>"']/g,m=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#039;"}[m]));},
+  rand(min,max){return Math.floor(Math.random()*(max-min+1))+min;}
+};
+document.addEventListener("DOMContentLoaded",()=>document.getElementById("totalScore").textContent=GameHub.score);
+
+window.LogicGames = {
+  tictactoe(area){
+    let b=Array(9).fill(""), turn="X", over=false, vsAI=true;
+    area.innerHTML=`<h2 class="game-title">❌ Tic-Tac-Toe</h2><p class="game-note">Matches the report's friend/computer mode.</p>
+      <div class="game-actions"><button class="secondary" id="mode">Mode: Computer</button><button class="secondary" id="reset">New Game</button></div>
+      <div class="status" id="tttStatus">Your turn (X)</div><div class="board ttt" id="tttBoard"></div>`;
+    const board=area.querySelector("#tttBoard"), st=area.querySelector("#tttStatus");
+    const wins=[[0,1,2],[3,4,5],[6,7,8],[0,3,6],[1,4,7],[2,5,8],[0,4,8],[2,4,6]];
+    function winner(x){return wins.find(w=>w.every(i=>b[i]===x));}
+    function draw(){board.innerHTML="";b.forEach((v,i)=>{let x=document.createElement("button");x.className="cell";x.textContent=v;x.onclick=()=>move(i);board.appendChild(x)})}
+    function end(){let w=winner("X")||winner("O"); if(w){over=true;st.textContent=`${w} wins!`;if(w==="X")GameHub.addScore(10)}else if(b.every(Boolean)){over=true;st.textContent="It's a draw."} }
+    function move(i){if(over||b[i]||(vsAI&&turn==="O"))return;b[i]=turn;draw();end();if(!over&&vsAI){turn="O";st.textContent="Computer is thinking…";setTimeout(ai,250)}else if(!over){turn=turn==="X"?"O":"X";st.textContent=`${turn}'s turn`}}
+    function ai(){let open=b.map((v,i)=>v?null:i).filter(v=>v!==null);let i=open[Math.floor(Math.random()*open.length)];if(i!==undefined)b[i]="O";draw();end();if(!over){turn="X";st.textContent="Your turn (X)"}}
+    area.querySelector("#mode").onclick=()=>{vsAI=!vsAI;area.querySelector("#mode").textContent=vsAI?"Mode: Computer":"Mode: Friend";reset()};
+    area.querySelector("#reset").onclick=reset;
+    function reset(){b=Array(9).fill("");turn="X";over=false;st.textContent="Your turn (X)";draw()} reset();
+  },
+
+  sudoku(area){
+    const solution=[[5,3,4,6,7,8,9,1,2],[6,7,2,1,9,5,3,4,8],[1,9,8,3,4,2,5,6,7],[8,5,9,7,6,1,4,2,3],[4,2,6,8,5,3,7,9,1],[7,1,3,9,2,4,8,5,6],[9,6,1,5,3,7,2,8,4],[2,8,7,4,1,9,6,3,5],[3,4,5,2,8,6,1,7,9]];
+    const puzzle=solution.map(r=>r.map(v=>Math.random()<.42?"":v));
+    area.innerHTML=`<h2 class="game-title">🔢 Sudoku</h2><p class="game-note">Complete the 9×9 grid using numbers 1–9 without repetition in a row, column or 3×3 box.</p><div class="game-actions"><button class="primary" id="check">Check Solution</button><button class="secondary" id="new">New Puzzle</button></div><div class="status" id="sStatus">Fill the empty cells.</div><div class="board sudoku" id="sBoard"></div>`;
+    function render(){const bd=area.querySelector("#sBoard");bd.innerHTML="";puzzle.forEach((r,ri)=>r.forEach((v,ci)=>{let inp=document.createElement("input");inp.type="number";inp.min=1;inp.max=9;inp.value=v;inp.disabled=!!v;inp.dataset.r=ri;inp.dataset.c=ci;bd.appendChild(inp)}))}
+    area.querySelector("#check").onclick=()=>{let ok=true;area.querySelectorAll("input").forEach(i=>{if(Number(i.value)!==solution[i.dataset.r][i.dataset.c])ok=false});area.querySelector("#sStatus").textContent=ok?"Correct! +20 points.":"Some cells are incorrect.";if(ok)GameHub.addScore(20)};
+    area.querySelector("#new").onclick=()=>location.reload(); render();
+  },
+
+  hangman(area){
+    const words=["ELEPHANT","JAVASCRIPT","PUZZLE","COMPUTER","ADVENTURE"];let word=words[Math.floor(Math.random()*words.length)], guessed=new Set(), wrong=0,max=6;
+    area.innerHTML=`<h2 class="game-title">🎯 Hangman</h2><p class="game-note">Guess the hidden word.</p><div class="status" id="hWord"></div><div id="letters" class="letters"></div><div class="status" id="hStatus">Wrong guesses: 0 / 6</div><button class="secondary" id="hNew">New Word</button>`;
+    const render=()=>{area.querySelector("#hWord").textContent=word.split("").map(c=>guessed.has(c)?c:"_").join(" ");};
+    const letters=area.querySelector("#letters");"ABCDEFGHIJKLMNOPQRSTUVWXYZ".split("").forEach(c=>{let x=document.createElement("button");x.className="letter-btn";x.textContent=c;x.onclick=()=>{x.disabled=true;if(word.includes(c))guessed.add(c);else wrong++;render();area.querySelector("#hStatus").textContent=`Wrong guesses: ${wrong} / ${max}`;if(word.split("").every(c=>guessed.has(c))){area.querySelector("#hStatus").textContent="You won! +15 points.";GameHub.addScore(15)}if(wrong>=max&&!word.split("").every(c=>guessed.has(c)))area.querySelector("#hStatus").textContent=`Game over. Word: ${word}`};letters.appendChild(x)});area.querySelector("#hNew").onclick=()=>this.hangman(area);render();
+  },
+
+  sliding(area){
+    let tiles=[1,2,3,4,5,6,7,8,""]; 
+    area.innerHTML=`<h2 class="game-title">🧩 Sliding Puzzle</h2><p class="game-note">Click a tile next to the empty space to arrange 1–8.</p><div class="puzzle" id="puzzle"></div><div class="status" id="pStatus">Moves: 0</div><button class="secondary" id="pNew">Shuffle</button>`;
+    let moves=0; function shuffle(){tiles=GameHub.shuffle(tiles);moves=0;render()}
+    function render(){const p=area.querySelector("#puzzle");p.innerHTML="";tiles.forEach((v,i)=>{let x=document.createElement("button");x.className="tile"+(v===""?" empty":"");x.textContent=v;x.onclick=()=>move(i);p.appendChild(x)});area.querySelector("#pStatus").textContent=`Moves: ${moves}`}
+    function move(i){let e=tiles.indexOf(""),ok=[i-3,i+3,i-1,i+1].includes(e)&&!(i%3===2&&e%3===0)&&!(i%3===0&&e%3===2);if(ok){[tiles[i],tiles[e]]=[tiles[e],tiles[i]];moves++;render();if(tiles.join(",")==="1,2,3,4,5,6,7,8,"){area.querySelector("#pStatus").textContent=`Solved in ${moves} moves! +20 points.`;GameHub.addScore(20)}}}
+    area.querySelector("#pNew").onclick=shuffle;shuffle();
+  }
+};
+
+window.MathGames = {
+  fibonacci(area){
+    area.innerHTML=`<h2 class="game-title">🌀 Fibonacci Sequence</h2><p class="game-note">Enter the number of terms.</p><div class="game-actions"><input id="n" type="number" min="1" max="30" value="10"><button class="primary" id="go">Generate</button></div><pre class="output" id="out"></pre>`;
+    area.querySelector("#go").onclick=()=>{let n=Math.max(1,Math.min(30,Number(area.querySelector("#n").value)||1)),a=0,b=1,res=[];for(let i=0;i<n;i++){res.push(a);[a,b]=[b,a+b]}area.querySelector("#out").textContent="Fibonacci Sequence: "+res.join(", ");GameHub.addScore(5)}
+  },
+  rps(area){
+    let choices=["Rock","Paper","Scissors"];
+    area.innerHTML=`<h2 class="game-title">✊ Rock-Paper-Scissors</h2><p class="game-note">Choose your move and play against the computer.</p><div class="choice-row">${choices.map(c=>`<button class="choice" data-c="${c}">${c}</button>`).join("")}</div><div class="status" id="rStatus">Make a choice.</div>`;
+    area.querySelectorAll(".choice").forEach(b=>b.onclick=()=>{let u=b.dataset.c,c=choices[Math.floor(Math.random()*3)],win=(u==="Rock"&&c==="Scissors")||(u==="Paper"&&c==="Rock")||(u==="Scissors"&&c==="Paper");let msg=u===c?"Tie!":win?"You win! +10 points.":"Computer wins.";area.querySelector("#rStatus").textContent=`You: ${u} | Computer: ${c} — ${msg}`;if(win)GameHub.addScore(10)})
+  },
+  guess(area){
+    let n=GameHub.rand(1,100),attempts=0;
+    area.innerHTML=`<h2 class="game-title">🎲 Guess My Number</h2><p class="game-note">Guess a number between 1 and 100.</p><div class="game-actions"><input id="g" type="number" min="1" max="100"><button class="primary" id="try">Guess</button></div><div class="status" id="gStatus">Attempts: 0</div>`;
+    area.querySelector("#try").onclick=()=>{let x=Number(area.querySelector("#g").value);attempts++;let s=area.querySelector("#gStatus");if(x===n){s.textContent=`Correct in ${attempts} attempts! +15 points.`;GameHub.addScore(15)}else s.textContent=x>n?"Too high! Try again.":"Too low! Try again."}
+  },
+  kenken(area){
+    let solution=10;
+    area.innerHTML=`<h2 class="game-title">➗ KenKen (Simplified)</h2><p class="game-note">Solve the arithmetic challenge used in the report's simplified implementation.</p><div class="question"><strong>Solve: 5 + 5 = ?</strong></div><div class="game-actions"><input id="k" type="number"><button class="primary" id="kgo">Submit</button></div><div class="status" id="kStatus"></div>`;
+    area.querySelector("#kgo").onclick=()=>{let ok=Number(area.querySelector("#k").value)===solution;area.querySelector("#kStatus").textContent=ok?"Correct! +10 points.":"Wrong. The correct answer is 10.";if(ok)GameHub.addScore(10)}
+  },
+
+};
+
+window.WordGames = {
+  scramble(area){
+    const words=["paper","banana","pear","orange","grapes"];
+    let i=0, score=0;
+    area.innerHTML=`<h2 class="game-title">🔤 Word Scramble</h2><p class="game-note">Unscramble the displayed word.</p><div class="status" id="wPrompt"></div><div class="game-actions"><input id="ans" type="text" placeholder="Your answer"><button class="primary" id="submit">Submit</button></div><div class="status" id="wStatus">Score: 0</div>`;
+    const scramble=w=>GameHub.shuffle(w.split("")).join("");
+    const next=()=>{ if(i>=words.length){area.querySelector("#wPrompt").textContent=`Finished! Score: ${score}`; area.querySelector("#submit").disabled=true; return;} area.querySelector("#wPrompt").textContent=`Solve: ${scramble(words[i])}`; area.querySelector("#ans").value=""; };
+    area.querySelector("#submit").onclick=()=>{const a=area.querySelector("#ans").value.trim().toLowerCase(); if(a===words[i]){score+=10;GameHub.addScore(10);area.querySelector("#wStatus").textContent=`Correct! Score: ${score}`;i++;next();}else area.querySelector("#wStatus").textContent="Wrong answer. Try again.";};
+    next();
+  },
+  chain(area){
+    const steps=[["apple","elephant"],["tiger","rabbit"],["turtle","elephant"]]; let i=0;
+    area.innerHTML=`<h2 class="game-title">🔗 Word Chain</h2><p class="game-note">Give a word beginning with the requested letter.</p><div class="status" id="cPrompt"></div><div class="game-actions"><input id="cAns" type="text"><button class="primary" id="cGo">Submit</button></div><div class="status" id="cStatus"></div>`;
+    const next=()=>{if(i>=steps.length){area.querySelector("#cPrompt").textContent="Chain complete!";area.querySelector("#cGo").disabled=true;return;}area.querySelector("#cPrompt").textContent=`Start with "${steps[i][0]}". Next word starts with "${steps[i][1][0].toUpperCase()}".`;};
+    area.querySelector("#cGo").onclick=()=>{const a=area.querySelector("#cAns").value.trim().toLowerCase();if(a.startsWith(steps[i][1][0])){area.querySelector("#cStatus").textContent="Correct! +10 points.";GameHub.addScore(10);i++;next();}else area.querySelector("#cStatus").textContent=`Try a word beginning with ${steps[i][1][0].toUpperCase()}.`;}; next();
+  },
+  trivia(area){
+    const qs=[["What is the capital of France?","paris"],["Who wrote Romeo and Juliet?","shakespeare"],["What is the largest ocean on Earth?","pacific"],["Who was the first president of the United States?","george washington"],["What is the smallest planet in our solar system?","mercury"]]; let i=0,score=0;
+    area.innerHTML=`<h2 class="game-title">🌍 Trivia Quiz</h2><div class="question" id="q"></div><div class="game-actions"><input id="tAns" type="text"><button class="primary" id="tGo">Submit</button></div><div class="status" id="tStatus"></div>`;
+    const next=()=>{if(i>=qs.length){area.querySelector("#q").textContent=`Quiz complete! Score: ${score}/50`;area.querySelector("#tGo").disabled=true;return;}area.querySelector("#q").textContent=`Question ${i+1}: ${qs[i][0]}`;area.querySelector("#tAns").value="";};
+    area.querySelector("#tGo").onclick=()=>{const a=area.querySelector("#tAns").value.trim().toLowerCase();if(a===qs[i][1]){score+=10;GameHub.addScore(10);area.querySelector("#tStatus").textContent="Correct! +10 points.";}else area.querySelector("#tStatus").textContent=`Wrong. Correct answer: ${qs[i][1]}`;i++;next();}; next();
+  }
+};
+
+document.addEventListener("DOMContentLoaded",()=>{
+  document.querySelectorAll(".tab").forEach(tab=>tab.onclick=()=>{
+    document.querySelectorAll(".tab").forEach(t=>t.classList.remove("active"));tab.classList.add("active");
+    document.querySelectorAll(".category").forEach(c=>c.classList.add("hidden"));
+    document.getElementById(tab.dataset.category).classList.remove("hidden");
+  });
+  const modal=document.getElementById("modal"),area=document.getElementById("gameArea");
+  document.querySelectorAll(".game-card button").forEach(btn=>btn.onclick=()=>{
+    const game=btn.closest(".game-card").dataset.game;
+    modal.classList.remove("hidden");modal.setAttribute("aria-hidden","false");
+    if(LogicGames[game])LogicGames[game](area);
+    else if(MathGames[game])MathGames[game](area);
+    else if(WordGames[game])WordGames[game](area);
+  });
+  function close(){modal.classList.add("hidden");modal.setAttribute("aria-hidden","true");area.innerHTML=""}
+  document.getElementById("closeModal").onclick=close;
+  modal.onclick=e=>{if(e.target===modal)close()};
+});
+
+</script>
+</body>
+</html>
