@@ -23,6 +23,7 @@ A web-based mini-games platform that integrates **Logic & Puzzle, Math & Strateg
 
 ## Technologies Used
 
+- **C (Structured Programming)** – Core game logic and algorithm design
 - **HTML5** – Web page structure
 - **CSS3** – User interface and styling
 - **JavaScript** – Game logic and interaction
